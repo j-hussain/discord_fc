@@ -22,7 +22,7 @@ def retrieve(accounts: List, phrase: "str") -> pd.DataFrame:
     tweet_df["Date Tweeted"] = pd.to_datetime(tweet_df["Date Tweeted"])
     # sort values in recency
     tweet_df.sort_values(by="Date Tweeted", ascending=False, inplace=True)
-    display(tweet_df)
+    display(tweet_df.head()
 
 
 retrieve(["FabrizioRomano", "David_Ornstein", "NizaarKinsella"], "Chelsea")
