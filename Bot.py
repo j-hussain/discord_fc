@@ -1,25 +1,18 @@
 # Bot.py
 
-import hikari
+import discord
+from get_tweets import *
+
 with open("../APIKeys/DFN_token.txt") as f:
     api_token = f.read()
 
-bot = hikari.GatewayBot(token=api_token)
+# let's move to hikari
 
-@bot.listen()
-async def soap(event: hikari.GuildMessageCreateEvent) -> None:
-    # don't want bot to reply to itself
-    if event.is_bot or not event.content:
-        return
+def main():
+    # do some bot running thing
 
-    if.event.content.startswith("!soap"):
-        await event.message.respond("Soap? What kinda name is soap?")
+    return
 
-# async def transfer_request(event: hikari.GuildMessageCreateEvent) -> None:
-"""
-
-Implement actual interaction
-
-"""
-
-bot.run()
+if __name__ == "__main__":
+    # do some bot.run stuff
+    main()
