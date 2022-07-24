@@ -1,12 +1,22 @@
 from typing import List
+import csv
+import sys, subprocess
+
 try:
     import snscrape.modules.twitter as scraper
     import pandas as pd
 except ModuleNotFoundError:
-    !pip install snscrape
-    !pip install pandas
+    install_module("snscrape")
+    install_module("pandas")
 
-def retrieve(accounts: List, phrase: "str") -> pd.DataFrame:
+def install_module(module):
+    return subprocess.check_call([sys.executable, "-m", "pip", "install", module])
+
+def retrieve(phrase: "str") -> pd.DataFrame:
+
+    # get data from CSV file
+    with open("./accounts.csv", newline="") as csvfile:
+        accounts = list(csv.reader(csvfile))
 
     data = []
 
@@ -25,4 +35,4 @@ def retrieve(accounts: List, phrase: "str") -> pd.DataFrame:
     display(tweet_df.head()
 
 
-retrieve(["FabrizioRomano", "David_Ornstein", "NizaarKinsella"], "Chelsea")
+retrieve("Chelsea")

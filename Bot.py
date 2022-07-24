@@ -1,18 +1,23 @@
 # Bot.py
 
-import discord
-from get_tweets import *
+import hikari, lightbulb
+import datetime
+import get_tweets
+
+def format_tweets(name):
+    retrieve()
 
 with open("../APIKeys/DFN_token.txt") as f:
     api_token = f.read()
 
-# let's move to hikari
+bot = lightbulb.BotApp(api_token)
+@bot.listen(hikari.StartedEvent)
+async def on_started(event):
+    print(f"Bot has started at {datetime.now()}")
 
-def main():
-    # do some bot running thing
-
-    return
-
-if __name__ == "__main__":
-    # do some bot.run stuff
-    main()
+@bot.command
+@lightbulb.command("search", "Searches for twitter related news about a given player.")
+@lightbulb.option("phrase", "Phrase you'd like to search", type=str)
+@lightbulb.implements(lightbulb.SlashCommand)
+async def search(ctx):
+    await ctx.respond( get_tweets(ctx.options.phrase) )
