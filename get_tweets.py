@@ -13,11 +13,8 @@ def install_module(module):
     return subprocess.check_call([sys.executable, "-m", "pip", "install", module])
 
 def retrieve(phrase: "str") -> pd.DataFrame:
-
     # get data from CSV file
-    with open("./accounts.csv", newline="") as csvfile:
-        accounts = list(csv.reader(csvfile))
-
+    accounts = ["DavidOrnstein", "FabrizioRomano", "NizaarKinsella"]
     data = []
 
     # crude iteration method - will make it more efficient soon
@@ -32,7 +29,8 @@ def retrieve(phrase: "str") -> pd.DataFrame:
     tweet_df["Date Tweeted"] = pd.to_datetime(tweet_df["Date Tweeted"])
     # sort values in recency
     tweet_df.sort_values(by="Date Tweeted", ascending=False, inplace=True)
-    display(tweet_df.head()
-
+    output = tweet_df.to_dict()
+    print("\n\n\n\n\n")
+    return output
 
 retrieve("Chelsea")

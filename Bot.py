@@ -4,8 +4,8 @@ import hikari, lightbulb
 import datetime
 import get_tweets
 
-def format_tweets(name):
-    retrieve()
+def format_tweets(name: str) -> pd.DataFrame:
+    get_tweets.retrieve()
 
 with open("../APIKeys/DFN_token.txt") as f:
     api_token = f.read()
@@ -20,4 +20,6 @@ async def on_started(event):
 @lightbulb.option("phrase", "Phrase you'd like to search", type=str)
 @lightbulb.implements(lightbulb.SlashCommand)
 async def search(ctx):
-    await ctx.respond( get_tweets(ctx.options.phrase) )
+    await ctx.respond( format_tweets(ctx.options.phrase) )
+
+bot.run()
